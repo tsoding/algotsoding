@@ -1,16 +1,27 @@
 package me.rexim.algotsoding.collections;
 
-import me.rexim.algotsoding.collections.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.IntSummaryStatistics;
+import java.util.List;
 
 public class BinaryTreeSetTest {
+
+    @Test
+    public void deleteFromEmpty() throws Exception {
+        Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
+
+        Assert.assertTrue(set.isEmpty());
+        set.delete(20);
+        Assert.assertTrue(set.isEmpty());
+    }
+
     @Test
     public void delete() throws Exception {
         Integer[] xs = {10, 5, 20, 79, 15};
-        me.rexim.algotsoding.collections.Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
+        Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
 
         for (Integer x: xs) {
             set.add(x);
@@ -23,7 +34,7 @@ public class BinaryTreeSetTest {
 
     @Test
     public void contains() throws Exception {
-        me.rexim.algotsoding.collections.Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
+        Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
 
         set.add(10);
         set.add(5);
@@ -35,7 +46,7 @@ public class BinaryTreeSetTest {
 
     @Test
     public void isEmpty() throws Exception {
-        me.rexim.algotsoding.collections.Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
+        Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
 
         Assert.assertTrue(set.isEmpty());
         set.add(10);
@@ -46,7 +57,7 @@ public class BinaryTreeSetTest {
     public void add() throws Exception {
         Integer[] xs = {10, 5, 20, 79, 15};
 
-        me.rexim.algotsoding.collections.Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
+        Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
 
         for (int x: xs) {
             set.add(x);
