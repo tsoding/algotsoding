@@ -10,11 +10,28 @@ public class BinaryTreeSet<E> implements Set<E> {
             this.value = value;
             this.left = left;
             this.right = right;
+
         }
 
-        E value;
-        Node left;
-        Node right;
+        Node(E value) {
+            this(value, null, null);
+        }
+
+        Node updateLeft(Node newLeft) {
+            return new Node(this.value, newLeft, this.right);
+        }
+
+        Node updateRight(Node newRight) {
+            return new Node(this.value, this.left, newRight);
+        }
+
+        Node updateValue(E newValue) {
+            return new Node(newValue, this.left, this.right);
+        }
+
+        final E value;
+        final Node left;
+        final Node right;
     }
 
     BinaryTreeSet(Comparator<E> comparator) {
@@ -28,9 +45,9 @@ public class BinaryTreeSet<E> implements Set<E> {
             int cmp = comparator.compare(currentRoot.value, node.value);
 
             if (cmp < 0) {
-                currentRoot.right = add(currentRoot.right, node);
+                return currentRoot.updateRight(add(currentRoot.right, node));
             } else if (cmp > 0) {
-                currentRoot.left = add(currentRoot.left, node);
+                return currentRoot.updateLeft(add(currentRoot.left, node));
             }
 
             return currentRoot;
@@ -39,7 +56,7 @@ public class BinaryTreeSet<E> implements Set<E> {
 
     @Override
     public void add(E element) {
-        root = add(root, new Node(element, null, null));
+        root = add(root, new Node(element));
     }
 
     private Node delete(Node currentRoot, E element) {
@@ -47,11 +64,9 @@ public class BinaryTreeSet<E> implements Set<E> {
             int cmp = comparator.compare(currentRoot.value, element);
 
             if (cmp < 0) {
-                currentRoot.right = delete(currentRoot.right, element);
-                return currentRoot;
+                return currentRoot.updateRight(delete(currentRoot.right, element));
             } else if (cmp > 0) {
-                currentRoot.left = delete(currentRoot.left, element);
-                return currentRoot;
+                return currentRoot.updateLeft(delete(currentRoot.left, element));
             } else {
                 return add(currentRoot.left, currentRoot.right);
             }
