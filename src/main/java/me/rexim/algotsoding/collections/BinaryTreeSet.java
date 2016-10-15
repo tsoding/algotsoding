@@ -5,40 +5,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BinaryTreeSet<E> implements Set<E> {
-    private class Node {
-        Node(E value, Node left, Node right) {
-            this.value = value;
-            this.left = left;
-            this.right = right;
-
-        }
-
-        Node(E value) {
-            this(value, null, null);
-        }
-
-        Node updateLeft(Node newLeft) {
-            return new Node(this.value, newLeft, this.right);
-        }
-
-        Node updateRight(Node newRight) {
-            return new Node(this.value, this.left, newRight);
-        }
-
-        Node updateValue(E newValue) {
-            return new Node(newValue, this.left, this.right);
-        }
-
-        final E value;
-        final Node left;
-        final Node right;
-    }
-
     BinaryTreeSet(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
-    private Node add(Node currentRoot, Node node) {
+    private DownNode<E> add(DownNode<E> currentRoot, DownNode<E> node) {
         if (currentRoot == null) {
             return node;
         } else {
@@ -56,10 +27,10 @@ public class BinaryTreeSet<E> implements Set<E> {
 
     @Override
     public void add(E element) {
-        root = add(root, new Node(element));
+        root = add(root, new DownNode<>(element));
     }
 
-    private Node delete(Node currentRoot, E element) {
+    private DownNode<E> delete(DownNode<E> currentRoot, E element) {
         if (currentRoot != null) {
             int cmp = comparator.compare(currentRoot.value, element);
 
@@ -86,16 +57,14 @@ public class BinaryTreeSet<E> implements Set<E> {
         return root == null;
     }
 
-    private boolean contains(Node currentRoot, E element) {
+    private boolean contains(DownNode<E> currentRoot, E element) {
         if (currentRoot != null) {
             int cmp = comparator.compare(currentRoot.value, element);
 
             if (cmp < 0) {
                 return contains(currentRoot.right, element);
-            } else if (cmp > 0) {
-                return contains(currentRoot.left, element);
             } else {
-                return true;
+                return cmp <= 0 || contains(currentRoot.left, element);
             }
         } else {
             return false;
@@ -109,12 +78,12 @@ public class BinaryTreeSet<E> implements Set<E> {
 
     @Override
     public List<E> toList() {
-        ArrayList<E> result = new ArrayList<E>();
+        ArrayList<E> result = new ArrayList<>();
         collectElements(root, result);
         return result;
     }
 
-    private void collectElements(Node currentNode, ArrayList<E> result) {
+    private void collectElements(DownNode<E> currentNode, ArrayList<E> result) {
         if (currentNode != null) {
             collectElements(currentNode.left, result);
             result.add(currentNode.value);
@@ -122,23 +91,6 @@ public class BinaryTreeSet<E> implements Set<E> {
         }
     }
 
-    private void print(Node currentNode, int level) {
-        if (currentNode != null) {
-            print(currentNode.left, level + 1);
-
-            for (int i = 0; i < level; ++i) {
-                System.out.print(' ');
-            }
-            System.out.println(currentNode.value.toString());
-
-            print(currentNode.right, level + 1);
-        }
-    }
-
-    public void print() {
-        print(root, 0);
-    }
-
-    private Node root = null;
+    private DownNode<E> root = null;
     private Comparator<E> comparator = null;
 }
