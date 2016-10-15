@@ -5,40 +5,42 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BinaryTreeSet<E> implements Set<E> {
-    private class Node {
-        Node(E value, Node left, Node right) {
+    /** A binary tree node that is only traversable down
+     */
+    private class DownNode {
+        DownNode(E value, DownNode left, DownNode right) {
             this.value = value;
             this.left = left;
             this.right = right;
 
         }
 
-        Node(E value) {
+        DownNode(E value) {
             this(value, null, null);
         }
 
-        Node updateLeft(Node newLeft) {
-            return new Node(this.value, newLeft, this.right);
+        DownNode updateLeft(DownNode newLeft) {
+            return new DownNode(this.value, newLeft, this.right);
         }
 
-        Node updateRight(Node newRight) {
-            return new Node(this.value, this.left, newRight);
+        DownNode updateRight(DownNode newRight) {
+            return new DownNode(this.value, this.left, newRight);
         }
 
-        Node updateValue(E newValue) {
-            return new Node(newValue, this.left, this.right);
+        DownNode updateValue(E newValue) {
+            return new DownNode(newValue, this.left, this.right);
         }
 
         final E value;
-        final Node left;
-        final Node right;
+        final DownNode left;
+        final DownNode right;
     }
 
     BinaryTreeSet(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
-    private Node add(Node currentRoot, Node node) {
+    private DownNode add(DownNode currentRoot, DownNode node) {
         if (currentRoot == null) {
             return node;
         } else {
@@ -56,10 +58,10 @@ public class BinaryTreeSet<E> implements Set<E> {
 
     @Override
     public void add(E element) {
-        root = add(root, new Node(element));
+        root = add(root, new DownNode(element));
     }
 
-    private Node delete(Node currentRoot, E element) {
+    private DownNode delete(DownNode currentRoot, E element) {
         if (currentRoot != null) {
             int cmp = comparator.compare(currentRoot.value, element);
 
@@ -86,7 +88,7 @@ public class BinaryTreeSet<E> implements Set<E> {
         return root == null;
     }
 
-    private boolean contains(Node currentRoot, E element) {
+    private boolean contains(DownNode currentRoot, E element) {
         if (currentRoot != null) {
             int cmp = comparator.compare(currentRoot.value, element);
 
@@ -114,7 +116,7 @@ public class BinaryTreeSet<E> implements Set<E> {
         return result;
     }
 
-    private void collectElements(Node currentNode, ArrayList<E> result) {
+    private void collectElements(DownNode currentNode, ArrayList<E> result) {
         if (currentNode != null) {
             collectElements(currentNode.left, result);
             result.add(currentNode.value);
@@ -122,7 +124,7 @@ public class BinaryTreeSet<E> implements Set<E> {
         }
     }
 
-    private void print(Node currentNode, int level) {
+    private void print(DownNode currentNode, int level) {
         if (currentNode != null) {
             print(currentNode.left, level + 1);
 
@@ -139,6 +141,6 @@ public class BinaryTreeSet<E> implements Set<E> {
         print(root, 0);
     }
 
-    private Node root = null;
+    private DownNode root = null;
     private Comparator<E> comparator = null;
 }
