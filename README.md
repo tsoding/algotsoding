@@ -3,4 +3,6 @@
 
 # AlgoTsoding #
 
-Classical algorithms in Java for AlgoTsoding stream
+Classical algorithms in Java for AlgoTsoding stream: https://www.twitch.tv/tsoding
+
+File any suggestions and topic requests as an issue.
