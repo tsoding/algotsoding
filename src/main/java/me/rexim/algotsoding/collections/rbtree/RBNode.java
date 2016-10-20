@@ -10,6 +10,26 @@ public class RBNode<E> {
         this.right = right;
     }
 
+    public RBNode(E value) {
+        this(value, Color.RED, null, null);
+    }
+
+    RBNode<E> updateNodes(RBNode<E> left, RBNode<E> right) {
+        return new RBNode<>(this.value, this.color, left, right);
+    }
+
+    RBNode<E> updateLeft(RBNode<E> left) {
+        return new RBNode<>(this.value, this.color, left, this.right);
+    }
+
+    RBNode<E> updateRight(RBNode<E> right) {
+        return new RBNode<>(this.value, this.color, this.left, right);
+    }
+
+    RBNode<E> blacken() {
+        return new RBNode<>(this.value, Color.BLACK, this.left, this.right);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o != null && o instanceof RBNode) {
