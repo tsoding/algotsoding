@@ -1,7 +1,11 @@
 package me.rexim.algotsoding.collections.rbtree;
 
+import me.rexim.algotsoding.collections.Set;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -108,7 +112,18 @@ public class RBTreeSetTest {
 
     @Test
     public void addTest() throws Exception {
+        Integer[] xs = {10, 5, 20, 79, 15};
 
+        Set<Integer> set = new RBTreeSet<>(Integer::compareTo);
+
+        for (int x: xs) {
+            set.add(x);
+        }
+
+        Arrays.sort(xs, Integer::compareTo);
+        List<Integer> elements = set.toList();
+
+        Assert.assertEquals(Arrays.asList(xs), elements);
     }
 
     @Test

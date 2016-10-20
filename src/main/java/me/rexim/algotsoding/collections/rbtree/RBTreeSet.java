@@ -2,6 +2,7 @@ package me.rexim.algotsoding.collections.rbtree;
 
 import me.rexim.algotsoding.collections.Set;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -112,7 +113,17 @@ public class RBTreeSet<E> implements Set<E> {
 
     @Override
     public List<E> toList() {
-        return null;
+        ArrayList<E> buffer = new ArrayList<>();
+        collectNodes(root, buffer);
+        return buffer;
+    }
+
+    private void collectNodes(RBNode<E> currentRoot, ArrayList<E> buffer) {
+        if (currentRoot != null) {
+            collectNodes(currentRoot.left, buffer);
+            buffer.add(currentRoot.value);
+            collectNodes(currentRoot.right, buffer);
+        }
     }
 
     @Override
