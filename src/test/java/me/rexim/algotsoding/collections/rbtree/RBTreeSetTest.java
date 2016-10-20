@@ -139,7 +139,14 @@ public class RBTreeSetTest {
 
     @Test
     public void containsTest() throws Exception {
+        Set<Integer> set = new RBTreeSet<>(Integer::compareTo);
 
+        set.add(10);
+        set.add(5);
+        set.add(3);
+
+        Assert.assertTrue(set.contains(5));
+        Assert.assertFalse(set.contains(22));
     }
 
     @Test
