@@ -1,4 +1,4 @@
-package me.rexim.algotsoding.collections;
+package me.rexim.algotsoding.collections.binarytree;
 
 /** A binary tree node that is only traversable down
  */
