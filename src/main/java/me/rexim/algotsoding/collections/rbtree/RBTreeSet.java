@@ -97,7 +97,7 @@ public class RBTreeSet<E> implements Set<E> {
 
     @Override
     public void delete(E element) {
-        // TODO: implement RBTreeSet.delete() operation
+        // TODO(#13): implement RBTreeSet.delete() operation
     }
 
     @Override
