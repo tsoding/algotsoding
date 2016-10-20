@@ -13,13 +13,14 @@ public class RBNodeTest {
     public void equalsTest() throws Exception {
         final RBNode<Integer> node1 = new RBNode<>(1, Color.RED,
                 new RBNode<>(2, Color.BLACK, null, null),
-                new RBNode<>(3, Color.RED, null, null));
+                new RBNode<>(3));
 
         final RBNode<Integer> node2 = new RBNode<>(1, Color.RED,
                 new RBNode<>(2, Color.BLACK, null, null),
                 new RBNode<>(3, Color.RED, null, null));
 
         Assert.assertEquals(node1, node2);
+        Assert.assertNotEquals(node1, null);
     }
 
     @Test
