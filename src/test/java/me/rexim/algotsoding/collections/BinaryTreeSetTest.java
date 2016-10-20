@@ -9,6 +9,8 @@ import java.util.List;
 
 public class BinaryTreeSetTest {
 
+    // TODO(#12): generalize BinaryTreeSetTest so it can be used for any implementation of Set interface
+
     @Test
     public void deleteFromEmpty() throws Exception {
         Set<Integer> set = new BinaryTreeSet<>(Integer::compareTo);
