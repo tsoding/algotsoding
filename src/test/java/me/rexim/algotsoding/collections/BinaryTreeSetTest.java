@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BinaryTreeSetTest {
 
-    // TODO: generalize BinaryTreeSetTest so it can be used for any implementation of Set interface
+    // TODO(#12): generalize BinaryTreeSetTest so it can be used for any implementation of Set interface
 
     @Test
     public void deleteFromEmpty() throws Exception {
