@@ -107,7 +107,7 @@ public class RBTreeSet<E> implements Set<E> {
 
     @Override
     public boolean contains(E element) {
-        // TODO: implement RBTreeSet.contains() operation
+        // TODO(#14): implement RBTreeSet.contains() operation
         return false;
     }
 
