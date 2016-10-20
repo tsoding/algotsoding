@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class SetTest {
@@ -68,5 +69,15 @@ public abstract class SetTest {
         List<Integer> elements = set.toList();
 
         Assert.assertEquals(Arrays.asList(xs), elements);
+    }
+
+    @Test
+    public void addAlreadyExistingTest() throws Exception {
+        Set<Integer> set = createSet();
+
+        set.add(10);
+        set.add(10);
+
+        Assert.assertEquals(Collections.singletonList(10), set.toList());
     }
 }
