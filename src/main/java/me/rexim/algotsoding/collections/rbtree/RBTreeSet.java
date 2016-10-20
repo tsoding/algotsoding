@@ -107,8 +107,21 @@ public class RBTreeSet<E> implements Set<E> {
 
     @Override
     public boolean contains(E element) {
-        // TODO(#14): implement RBTreeSet.contains() operation
-        return false;
+        return nodeContains(root, element);
+    }
+
+    private boolean nodeContains(RBNode<E> currentRoot, E element) {
+        if (currentRoot != null) {
+            int cmp = comparator.compare(currentRoot.value, element);
+
+            if (cmp < 0) {
+                return nodeContains(currentRoot.right, element);
+            } else {
+                return cmp == 0 || nodeContains(currentRoot.left, element);
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override
