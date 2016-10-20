@@ -1,10 +1,11 @@
-package me.rexim.algotsoding.collections;
+package me.rexim.algotsoding.collections.binarytree;
 
+import me.rexim.algotsoding.collections.Set;
+import me.rexim.algotsoding.collections.binarytree.BinaryTreeSet;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 
 public class BinaryTreeSetTest {

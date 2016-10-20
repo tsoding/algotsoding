@@ -1,4 +1,6 @@
-package me.rexim.algotsoding.collections;
+package me.rexim.algotsoding.collections.binarytree;
+
+import me.rexim.algotsoding.collections.Set;
 
 import java.util.ArrayList;
 import java.util.Comparator;
